@@ -1,8 +1,38 @@
 package main
 
+/*
+<sitemapindex>
+   <sitemap>
+      <loc>http://www.washingtonpost.com/news-entertainment-sitemap.xml</loc>
+   </sitemap>
+   <sitemap>
+      <loc>http://www.washingtonpost.com/news-blogs-entertainment-sitemap.xml</loc>
+   </sitemap>
+   <sitemap>
+      <loc>http://www.washingtonpost.com/news-blogs-goingoutguide-sitemap.xml</loc>
+   </sitemap>
+   <sitemap>
+      <loc>http://www.washingtonpost.com/news-goingoutguide-sitemap.xml</loc>
+   </sitemap>
+</sitemapindex>
+*/
+
 import("fmt"
 		"net/http"
-		"io/ioutil")
+		"io/ioutil"
+		"encoding/xml")
+
+type SitemapIndex struct {
+	Locations []Location `xml:"sitemap"`
+}
+
+type Location struct {
+	Loc string `xml:"loc"`
+}
+
+func (l Location) String() string {
+	return fmt.Sprintf(l.Loc)
+}
 
 func main() {
 	
@@ -13,8 +43,14 @@ func main() {
 
 	resp, _ := http.Get("https://www.washingtonpost.com/news-sitemap-index.xml")
 	bytes, _ := ioutil.ReadAll(resp.Body)
-
-	string_body := string(bytes)
-	fmt.Println(string_body)
 	resp.Body.Close()
+
+	var s SitemapIndex
+	xml.Unmarshal(bytes, &s)
+
+	fmt.Println(s.Locations)
+
+	//string_body := string(bytes)
+	//fmt.Println(string_body)
+	
 }

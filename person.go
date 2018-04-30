@@ -10,6 +10,8 @@ type Person struct {
 func main(){
 
 	vault_dwellers := make(map[int]Person)
+	// map[int] index type
+	// Person content type
 
 	for i := 1; i <= 5 ; i++ {
 		var number int = i

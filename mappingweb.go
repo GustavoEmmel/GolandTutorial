@@ -39,15 +39,18 @@ func main() {
 
 		for idx, _ := range n.Titles{
 			news_map[n.Titles[idx]] = NewsMap{n.Keywords[idx], n.Locations[idx]}
+
+			//fmt.Println(n.Titles[idx])
 		}
 
 	}
+	
+//fmt.Println(news_map)
 	
 	for idx, data := range news_map{
 		fmt.Println("\n\n\n", idx)
 		fmt.Println("\n", data.Keyword)
 		fmt.Println("\n", data.Location)
 	}
-
 
 }

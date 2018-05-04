@@ -1,4 +1,4 @@
-// hello.go
+// hello.main
 package main
 
 import (
@@ -7,16 +7,24 @@ import (
 )
 
 func main() {
-	t := "Hello World!"
-	s := []rune(t)
-
-	for {
-		rand.Shuffle(len(s), func(i int, j int) {
-			s[i], s[j] = s[j], s[i]
-		})
-		if string(s) == t {
+	t := "Hello world!"
+	c := make(chan string)
+	for i := 0; i < 32; i++ {
+		go gopher(t, c)
+	}
+	for s := range c {
+		fmt.Println(s)
+		if s == t {
 			break
 		}
 	}
-	fmt.Println(string(s))
+}
+func gopher(t string, c chan string) {
+	s := []rune(t)
+	for {
+		rand.Shuffle(len(s), func(i, j int) {
+			s[i], s[j] = s[j], s[i]
+		})
+		c <- string(s)
+	}
 }

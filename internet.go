@@ -17,10 +17,12 @@ package main
 </sitemapindex>
 */
 
-import("fmt"
-		"net/http"
-		"io/ioutil"
-		"encoding/xml")
+import (
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
 
 type SitemapIndex struct {
 	Locations []Location `xml:"sitemap"`
@@ -35,11 +37,11 @@ func (l Location) String() string {
 }
 
 func main() {
-	
+
 	/*
 	* resp = response
 	* _ error, if not used, go discard _ variable
-	*/
+	 */
 
 	resp, _ := http.Get("https://www.washingtonpost.com/news-sitemap-index.xml")
 	bytes, _ := ioutil.ReadAll(resp.Body)
@@ -50,13 +52,13 @@ func main() {
 
 	//fmt.Println(s.Locations)
 
-	for _, Location := range s.Locations{
+	for _, Location := range s.Locations {
 		fmt.Printf("\n%s", Location)
 	}
-	
+
 	fmt.Printf("\nHere %s some %s", "are", "variables")
 
 	//string_body := string(bytes)
 	//fmt.Println(string_body)
-	
+
 }

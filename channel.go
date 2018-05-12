@@ -17,4 +17,5 @@ func main() {
 	v2 := <-fooVal
 
 	fmt.Println(v1, v2)
+	// return 15 and 25
 }

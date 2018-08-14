@@ -1,11 +1,13 @@
 package main
 
-import ("fmt"
-		"math"
-		"math/rand")
+import (
+	"fmt"
+	"math"
+	"math/rand"
+)
 
 func foo() {
-	fmt.Println("The square root of 4 is", math.Sqrt(4))
+	fmt.Println("The square root of 9 is", math.Sqrt(4))
 }
 
 func main() {
